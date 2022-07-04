@@ -62,7 +62,7 @@ def bbox_map_eval(det_result, annotation, nproc=4):
     for p in processes:
         mean_aps.append(p.get()[0])
 
-    return sum(mean_aps) / len(mean_aps)
+    return np.mean(mean_aps)
 
 
 class ResultVisualizer:
