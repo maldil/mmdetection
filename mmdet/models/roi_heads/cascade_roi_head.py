@@ -598,7 +598,7 @@ class CascadeRoIHead(BaseRoIHead, BBoxTestMixin, MaskTestMixin):
                 rois = torch.cat([rois.new_zeros(rois.shape[0], 1), rois],
                                  dim=-1)
 
-        cls_score = sum(ms_scores) / float(len(ms_scores))
+        cls_score = np.mean(ms_scores)
         bbox_pred = bbox_pred.reshape(batch_size, num_proposals_per_img, 4)
         rois = rois.reshape(batch_size, num_proposals_per_img, -1)
         det_bboxes, det_labels = self.bbox_head[-1].onnx_export(
