@@ -352,7 +352,7 @@ class CustomDataset(Dataset):
                     logger=logger)
                 mean_aps.append(mean_ap)
                 eval_results[f'AP{int(iou_thr * 100):02d}'] = round(mean_ap, 3)
-            eval_results['mAP'] = sum(mean_aps) / len(mean_aps)
+            eval_results['mAP'] = np.mean(mean_aps)
         elif metric == 'recall':
             gt_bboxes = [ann['bboxes'] for ann in annotations]
             recalls = eval_recalls(
